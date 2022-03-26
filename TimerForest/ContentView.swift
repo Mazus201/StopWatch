@@ -103,24 +103,25 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
             }
-            
-            VStack(spacing: 15) {
-                ForEach(stopTimes, id: \.self) { //перебираем массив и отображаем значение в списке
-                    stopTime in Text(stopTime)
-                    if pitStop != 0 {
-                        Rectangle()
-                            .fill(.black)
-                            .frame(width: 300, height: 1)
-                            .opacity(0.5)
+            ScrollView(showsIndicators: false){
+                VStack(spacing: 15) {
+                    ForEach(stopTimes, id: \.self) { //перебираем массив и отображаем значение в списке
+                        stopTime in Text(stopTime)
+                        if pitStop != 0 {
+                            Rectangle()
+                                .fill(.black)
+                                .frame(width: 300, height: 1)
+                                .opacity(0.5)
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
+//                .frame(width: 300, height: 500)
+                .foregroundColor(.white)
+                .font(.system(size: 20))
             }
             .frame(width: 300, height: 500)
             .offset(y: 200)
-            .foregroundColor(.white)
-            .font(.system(size: 20))
-            
         }
     }
 }
