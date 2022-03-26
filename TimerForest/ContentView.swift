@@ -51,10 +51,10 @@ struct ContentView: View {
                                 timeRemaining = 0.0
                                 starTimer = false
                                 pitStop = 0
-                                stopTimes = [""]
+                                stopTimes = []
                             }
                             else{
-                                if pitStop >= 0 {
+                                if (pitStop >=  0 && starTimer == true) {
                                     stopTimes.append(String(format: "%.2f", timeRemaining)) //записываем в массив на место курга значение из таймера
                                     pitStop += 1 //добавляем в стопы + 1, чтобы потом на это место записать новый круг
                                 }
@@ -62,21 +62,40 @@ struct ContentView: View {
                         })
                         {
                             if (starTimer == false && timeRemaining != 0.0) {
-                                Text("Reset")
-                                    .padding(.trailing, 50)
-                                    .foregroundColor(.white)
+                                HStack{
+                                    Image(systemName: "memories")
+                                        .foregroundColor(.white)
+                                    Text("Reset")
+                                        .padding(.trailing, 50)
+                                        .foregroundColor(.white)
+                                }
                             }
                             else {
-                                Text("Lap")
-                                    .padding(.trailing, 50)
-                                    .foregroundColor(.white)
+                                HStack{
+                                    Image(systemName: "goforward")
+                                        .foregroundColor(.white)
+                                    Text("Lap")
+                                        .padding(.trailing, 50)
+                                        .foregroundColor(.white)
+                                }
+                                
                             }
                         }
                         Button(action: {
                             starTimer.toggle() //включаем таймер
                         }){
-                            Text("▶︎Play")
-                                .foregroundColor(.white)
+                            if starTimer == true {
+                                HStack{
+                                    Image(systemName: "pause.fill")
+                                        .foregroundColor(.white)
+                                    Text("Pause")
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            else {
+                                Text("▶︎ Play")
+                                    .foregroundColor(.white)
+                            }
                         }
                     }
                     
